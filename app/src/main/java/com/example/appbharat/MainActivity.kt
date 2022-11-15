@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.appbharat.databinding.ActivityMainBinding
@@ -51,8 +51,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.memeRV.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.memeRV.adapter = mainAdapter
-        val snapHelper: SnapHelper = LinearSnapHelper()
+        val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.memeRV)
+
     }
 
     override fun observeData() {
