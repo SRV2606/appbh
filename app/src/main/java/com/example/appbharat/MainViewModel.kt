@@ -15,15 +15,10 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
     val _memeData = _memeRespData.asStateFlow()
 
 
-    init {
-        getMemes()
-    }
-
     fun getMemes() {
         viewModelScope.launch {
             val response = mainRepository.getMemes()
             if (response?.success == true && response.data != null) {
-                //do something
                 _memeRespData.emit(response)
             }
         }

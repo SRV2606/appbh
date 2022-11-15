@@ -8,10 +8,13 @@ import com.example.practice.base.BaseViewHolder
 class MainViewHolder(
     private val binding: ItemRecyclerCardBinding,
     private val context: Context,
+) : BaseViewHolder<ServerMemes.Data.Meme>(binding) {
 
-    ) : BaseViewHolder<Meme>(binding) {
+    override fun setItem(
+        data: ServerMemes.Data.Meme?,
+        itemClickListener: (ServerMemes.Data.Meme) -> Unit
+    ) {
 
-    override fun setItem(data: Meme?, itemClickListener: (Meme) -> Unit) {
         data?.let {
             Glide.with(context).load(it.url).into(binding.memeImageIV)
             binding.memeTextTV.text = it.name

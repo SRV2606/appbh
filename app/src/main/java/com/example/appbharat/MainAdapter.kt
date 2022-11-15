@@ -8,22 +8,23 @@ import com.example.appbharat.databinding.ItemRecyclerCardBinding
 import com.example.practice.base.BaseViewHolder
 
 class MainAdapter(
-    private val itemClickListener: (Meme) -> Unit,
+    private val itemClickListener: (ServerMemes.Data.Meme) -> Unit,
     private val context: Context
-) : androidx.recyclerview.widget.ListAdapter<Meme, BaseViewHolder<*>>(DIFF_CALLBACK) {
+) : androidx.recyclerview.widget.ListAdapter<ServerMemes.Data.Meme, BaseViewHolder<*>>(DIFF_CALLBACK) {
+
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Meme>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ServerMemes.Data.Meme>() {
             override fun areItemsTheSame(
-                oldItem: Meme,
-                newItem: Meme
+                oldItem: ServerMemes.Data.Meme,
+                newItem: ServerMemes.Data.Meme
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Meme,
-                newItem: Meme
+                oldItem: ServerMemes.Data.Meme,
+                newItem: ServerMemes.Data.Meme
             ): Boolean {
                 return oldItem == newItem
             }
@@ -32,6 +33,7 @@ class MainAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+
         return MainViewHolder(
             ItemRecyclerCardBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -49,6 +51,7 @@ class MainAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
+
         return super.getItemViewType(position)
     }
 }

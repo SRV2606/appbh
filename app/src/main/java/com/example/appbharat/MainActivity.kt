@@ -1,7 +1,8 @@
 package com.example.appbharat
 
 import android.content.Intent
-import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -26,22 +27,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mainViewModel by viewModels<MainViewModel>()
 
-    private val mainAdapter by lazy {
+    private val mainAdapter: MainAdapter by lazy {
         MainAdapter(itemClickListener = {
+            Toast.makeText(
+                this, "this${it}", Toast.LENGTH_SHORT
+            ).show()
 
-        }, context = this@MainActivity)
+        }, this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+
 
     override fun readArguments(extras: Intent) {
 
     }
 
     override fun setupUi() {
+        mainViewModel.getMemes()
         setUpRecycler()
     }
 
@@ -55,8 +57,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun observeData() {
         collectEvent(mainViewModel._memeData) {
-            it?.data?.let { memesList ->
-                mainAdapter.submitList(memesList.memes)
+            Log.d("SHAW_TAG", "observeData: " + it)
+            it?.data?.memes.let {
+                mainAdapter.submitList(it)
             }
         }
     }
